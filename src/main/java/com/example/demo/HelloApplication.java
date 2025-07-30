@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class HelloApplication extends Application {
     @Override
@@ -19,5 +20,14 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+        ItemAPI itemAPI = new ItemAPI();
+        try{
+            List<Item> items = itemAPI.fetchAll(1);
+            for (Item item : items) {
+                System.out.println(item.getName());
+            }
+        }catch(Exception e){
+            System.out.printf("Error: %s\n",e.getMessage());;
+        }
     }
 }
