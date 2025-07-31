@@ -1,9 +1,7 @@
 package com.example.demo;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
@@ -22,6 +20,9 @@ public class ItemController {
 
     @FXML
     private TableView<Item> table;
+
+    @FXML
+    private TextField search;
 
     private List<Item> items = new ArrayList<>();
 
@@ -49,5 +50,21 @@ public class ItemController {
         }catch(Exception e){
             System.out.printf("Error: %s\n",e.getMessage());;
         }
+
+        search.textProperty().addListener((observable, oldValue, newValue) -> filterItems(newValue));
+    }
+    private void filterItems(String itemLookedUp){
+        if(itemLookedUp == null || itemLookedUp.isBlank()){
+            table.getItems().setAll(items);
+            return;
+        }
+        String lowerCase = itemLookedUp.toLowerCase();
+        List<Item> filteredItems = new ArrayList<>();
+        for(Item item : items){
+            if(item.getName().toLowerCase().contains(lowerCase)){
+                filteredItems.add(item);
+            }
+        }
+        table.getItems().setAll(filteredItems);
     }
 }
