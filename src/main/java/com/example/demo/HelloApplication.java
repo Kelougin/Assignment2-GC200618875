@@ -16,15 +16,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-        ItemAPI itemAPI = new ItemAPI();
-        try{
-            List<Item> items = itemAPI.fetchAll(100);
-            for (Item item : items) {
-                System.out.println(item.getName());
-            }
-        }catch(Exception e){
-            System.out.printf("Error: %s\n",e.getMessage());;
-        }
+
     }
 
     public static void main(String[] args) {
