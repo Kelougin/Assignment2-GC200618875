@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Model;
 
 public class Details {
     private String members; //Variable for holding members value

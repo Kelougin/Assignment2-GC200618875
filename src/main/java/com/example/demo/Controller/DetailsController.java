@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.API.DetailsAPI;
+import com.example.demo.Model.Details;
+import com.example.demo.Model.Item;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

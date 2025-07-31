@@ -1,16 +1,21 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
+import com.example.demo.API.ItemAPI;
+import com.example.demo.StartApplication;
+import com.example.demo.Model.Item;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ItemController {
 
@@ -44,12 +49,13 @@ public class ItemController {
                 if(!row.isEmpty() && click.getClickCount() == 2){ //If row is clicked twice and is not empty do the following
                     Item itemClicked = row.getItem(); //Stores item of the row in a variable
                     try{
-                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("details-view.fxml")); //Get resources from view
+                        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("details-view.fxml")); //Get resources from view
                         Scene scene = new Scene(fxmlLoader.load(), 1000, 650); //Loads resources in scene
                         DetailsController detailsController = fxmlLoader.getController(); //Loads controller
                         detailsController.initialize(itemClicked); //Runs controller with item from row
                         Stage detailsWindow = new Stage(); //Set a new stage
                         detailsWindow.setTitle("Details for: " + itemClicked.getName());  //Set stage title
+                        detailsWindow.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/Images/rs3icon.png")).toExternalForm())); //Replace top left icon
                         detailsWindow.setScene(scene); //Set stage scene
                         detailsWindow.initModality(Modality.APPLICATION_MODAL); //Make it so you can't interact with item window while details window is open
                         detailsWindow.show(); //Show stage

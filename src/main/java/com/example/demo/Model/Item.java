@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.Model;
 
 public class Item {
     private int id; //Variable for item id

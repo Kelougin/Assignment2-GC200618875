@@ -1,0 +1,28 @@
+AnchorPane{
+    -fx-background-color: white;
+    -fx-padding: 30px;
+}
+Label{
+    -fx-font-size: 30px;
+    -fx-text-fill: lightblue;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+}
+.table-view{
+    -fx-border-color: black;
+    -fx-border-width: 3;
+}
+.column-header{
+    -fx-background-color: white;
+}
+.column-header .label{
+    -fx-font-size: 14px;
+}
+.table-row-cell{
+    -fx-border-color: lightblue;
+    -fx-border-width: 1;
+    -fx-cursor: pointer;
+}
+.text-field{
+    -fx-border-color: black;
+}

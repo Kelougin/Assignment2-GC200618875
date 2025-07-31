@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.API;
 
+import com.example.demo.Model.Item;
 import com.google.gson.*;
 import java.io.IOException;
 import java.net.URI;

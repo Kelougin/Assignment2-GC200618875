@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.API;
 
+import com.example.demo.Model.Details;
+import com.example.demo.Model.Item;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
