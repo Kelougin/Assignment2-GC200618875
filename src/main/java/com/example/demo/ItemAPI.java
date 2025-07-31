@@ -25,7 +25,7 @@ public class ItemAPI {
 
         while (items.size() < maxItems) {
             String url = BASE_URL + category + "&alpha=" + letters[letterIncrement] + "&page=" + page; //variable for holding api url
-            System.out.println("URL: " + url);
+            //System.out.println("URL: " + url); for debugging
             HttpRequest request = HttpRequest.newBuilder() //build http request
                     .uri(URI.create(url))
                     .GET()
@@ -39,7 +39,7 @@ public class ItemAPI {
             if (response.statusCode() != 200) { //If connection failed7
                 throw new IOException("Failed : HTTP error code : " + response.statusCode() + "-" + response.body()); //Throws exception
             }
-            JsonObject rootObject = JsonParser.parseString(response.body()).getAsJsonObject();
+            JsonObject rootObject = JsonParser.parseString(response.body()).getAsJsonObject(); //Gets json file
             JsonArray itemObject = rootObject.getAsJsonArray("items"); //Gets array of items using items key
             for(JsonElement jsonElement : itemObject) { //For loop to go through each object
                 Item item = new Gson().fromJson(jsonElement, Item.class); //Gets values from api to store in class

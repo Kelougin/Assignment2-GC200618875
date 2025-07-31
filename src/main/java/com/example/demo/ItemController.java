@@ -1,8 +1,13 @@
 package com.example.demo;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,61 +15,78 @@ import java.util.List;
 public class ItemController {
 
     @FXML
-    private TableColumn<Item, String> colDescription;
+    private TableColumn<Item, String> colDescription; //Variable for description column
 
     @FXML
-    private TableColumn<Item, String> colName;
+    private TableColumn<Item, String> colName; //Variable for name column
 
     @FXML
-    private TableColumn<Item, String> colType;
+    private TableColumn<Item, String> colType; //Variable for type column
 
     @FXML
-    private TableView<Item> table;
+    private TableView<Item> table; //Variable for table
 
     @FXML
-    private TextField search;
+    private TextField search; //Variable for text search
 
-    private List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>(); //Array list to hold item
 
     @FXML
     public void initialize(){
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description")); //Use property value to get value from description
+        colName.setCellValueFactory(new PropertyValueFactory<>("name")); //Use property value to get value from name
+        colType.setCellValueFactory(new PropertyValueFactory<>("type")); //Use property value to get value from type
 
-        table.setRowFactory(event ->{
-            TableRow<Item> row = new TableRow<>();
-            row.setOnMouseClicked(click -> {
-                if(!row.isEmpty() && click.getClickCount() == 2){
-                    Item itemClicked = row.getItem();
-                    //showDetail(itemClicked);
+        //Set event for table row
+        table.setRowFactory(_ ->{
+            TableRow<Item> row = new TableRow<>(); //Variable for rows
+            row.setOnMouseClicked(click -> { //Set event for on mouse clicked
+                if(!row.isEmpty() && click.getClickCount() == 2){ //If row is clicked twice and is not empty do the following
+                    Item itemClicked = row.getItem(); //Stores item of the row in a variable
+                    try{
+                        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("details-view.fxml")); //Get resources from view
+                        Scene scene = new Scene(fxmlLoader.load(), 1000, 650); //Loads resources in scene
+                        DetailsController detailsController = fxmlLoader.getController(); //Loads controller
+                        detailsController.initialize(itemClicked); //Runs controller with item from row
+                        Stage detailsWindow = new Stage(); //Set a new stage
+                        detailsWindow.setTitle("Details for: " + itemClicked.getName());  //Set stage title
+                        detailsWindow.setScene(scene); //Set stage scene
+                        detailsWindow.initModality(Modality.APPLICATION_MODAL); //Make it so you can't interact with item window while details window is open
+                        detailsWindow.show(); //Show stage
+                    }catch (Exception e){
+                        System.err.println(e.getMessage()); //Prints exception
+                    }
                 }
             });
-            return row;
+            return row; //Returns rows
         });
 
         try{
-            List<Item> itemFetched = new ItemAPI().fetchAll(100);
-            items.addAll(itemFetched);
-            javafx.application.Platform.runLater(()-> table.getItems().setAll(items));
+            List<Item> itemFetched = new ItemAPI().fetchAll(100); //Fetches items and stored them in array
+            items.addAll(itemFetched); //Adds items fetched to items
+            Platform.runLater(()-> table.getItems().setAll(items)); //Set values in table
         }catch(Exception e){
-            System.out.printf("Error: %s\n",e.getMessage());;
+            System.out.printf("Error: %s\n",e.getMessage()); //Prints error message
         }
 
-        search.textProperty().addListener((observable, oldValue, newValue) -> filterItems(newValue));
+        search.textProperty().addListener((observable, oldValue, newValue) -> filterItems(newValue)); //Event for searching
     }
+    /**
+     * Method for filtering items
+     * @param itemLookedUp String to hold word that is being looked up*/
     private void filterItems(String itemLookedUp){
-        if(itemLookedUp == null || itemLookedUp.isBlank()){
-            table.getItems().setAll(items);
-            return;
+        if(itemLookedUp == null || itemLookedUp.isBlank()){ //Check if item looked is blank or null
+            table.getItems().setAll(items); //Gets all items for table
+            return; //Returns
         }
-        String lowerCase = itemLookedUp.toLowerCase();
-        List<Item> filteredItems = new ArrayList<>();
-        for(Item item : items){
-            if(item.getName().toLowerCase().contains(lowerCase)){
-                filteredItems.add(item);
+        String lowerCase = itemLookedUp.toLowerCase(); //Set itemlookedup value to lower case
+        List<Item> filteredItems = new ArrayList<>(); //Array for holding filtered items
+        for(Item item : items){ //Loop through each item
+            if(item.getName().toLowerCase().contains(lowerCase)){ //Check if parameter value is equal to an items name
+                filteredItems.add(item); //Adds item to filter items
             }
         }
-        table.getItems().setAll(filteredItems);
+        table.getItems().setAll(filteredItems); //Gets filtered items for table
     }
+
 }
