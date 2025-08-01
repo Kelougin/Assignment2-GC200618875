@@ -1,0 +1,21 @@
+AnchorPane{
+    -fx-background-color: white; /* Set background color to white  */
+    -fx-padding: 30px; /* Set padding  */
+}
+GridPane{
+    -fx-border-color: black; /* Set border to black  */
+    -fx-border-width: 2; /* Set border width  */
+}
+Label{
+    -fx-text-fill: black; /* Set text to black */
+    -fx-font-size: 24px; /* Set font size */
+}
+#nameLabel{
+    -fx-text-fill: lightblue; /* set text color to light blue */
+    -fx-font-size: 36px; /* set font size */
+    -fx-font-weight: bold; /* Set font weight to bold */
+}
+#itemIcon{
+    -fx-border-color: black; /* Set border to color to black  */
+    -fx-padding: 10; /* Set padding */
+}

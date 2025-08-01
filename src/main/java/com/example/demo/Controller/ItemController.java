@@ -50,7 +50,7 @@ public class ItemController {
                     Item itemClicked = row.getItem(); //Stores item of the row in a variable
                     try{
                         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("details-view.fxml")); //Get resources from view
-                        Scene scene = new Scene(fxmlLoader.load(), 1000, 650); //Loads resources in scene
+                        Scene scene = new Scene(fxmlLoader.load(), 800, 600); //Loads resources in scene
                         DetailsController detailsController = fxmlLoader.getController(); //Loads controller
                         detailsController.initialize(itemClicked); //Runs controller with item from row
                         Stage detailsWindow = new Stage(); //Set a new stage

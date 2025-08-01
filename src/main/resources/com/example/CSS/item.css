@@ -1,28 +1,32 @@
 AnchorPane{
-    -fx-background-color: white;
-    -fx-padding: 30px;
+    -fx-background-color: white; /* Set background color of anchor plane to whit*/
+    -fx-padding: 30px; /* Set padding to 30px */
 }
 Label{
-    -fx-font-size: 30px;
-    -fx-text-fill: lightblue;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
+    -fx-font-size: 48px; /* Set font size  */
+    -fx-text-fill: lightblue;/* Set font color */
+    -fx-font-weight: bold;/* Set font weight  */
+    -fx-padding: 10px;/* Set padding  */
 }
 .table-view{
-    -fx-border-color: black;
-    -fx-border-width: 3;
+    -fx-border-color: black;/* Set border color to black  */
+    -fx-border-width: 3;/* Set border width */
 }
 .column-header{
-    -fx-background-color: white;
+    -fx-background-color: white;/* Set background color  */
 }
 .column-header .label{
-    -fx-font-size: 14px;
+    -fx-font-size: 14px;/* Set font size  */
+}
+.vbox{
+    -fx-spacing: 10; /* Set spacing */
+    -fx-alignment: center;/* Align item to center  */
 }
 .table-row-cell{
-    -fx-border-color: lightblue;
-    -fx-border-width: 1;
-    -fx-cursor: pointer;
+    -fx-border-color: lightblue;/* Set border color */
+    -fx-border-width: 1;/* Set border width  */
+    -fx-cursor: hand;/* Set cursor to hand  */
 }
 .text-field{
-    -fx-border-color: black;
+    -fx-border-color: black; /* Set border to black  */
 }
